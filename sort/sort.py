@@ -59,6 +59,44 @@ def insert_sort(a):
     print("n={}, i={}, cmp_count={}, assign_count={}".format(n, i, cmp_count, assign_count))
     print(a)
 
+def quick_sort(a):
+    n = len(a)
+    if n<=1: return a
+    pivot = a[0]
+    # i=1
+    # j=n-1
+    # while i <= j:
+    #     while j>0 and a[j] >= pivot: j-=1
+    #     while i<=j and i<n and a[i] <= pivot:  i+=1
+    #     if i<j:
+    #         temp = a[i]
+    #         a[i] = a[j]
+    #         a[j] = temp
+    #         j-=1
+    #         i+=1
+    # l = quick_sort(a[1:i])
+    # r = quick_sort(a[i:n])
+    j = i = 1
+    while i<n:
+        if a[i] < pivot:
+            temp = a[i]
+            a[i] = a[j]
+            a[j] = temp
+            j += 1
+        i+=1
+
+    l = quick_sort(a[1:j])
+    r = quick_sort(a[j:n])
+    return l+[pivot]+r
+
+def quick_sort_wrap(a):
+    n = len(a)
+    ret = quick_sort(a)
+    print("n={}".format(n))
+    print(ret)
+
+
+
 
 def test(func):
     a = [1,2,3,4,5,6,7,8,9]
@@ -74,3 +112,5 @@ print("========select_sort========")
 test(select_sort)
 print("========insert_sort========")
 test(insert_sort)
+print("========quick_sort========")
+test(quick_sort_wrap)
